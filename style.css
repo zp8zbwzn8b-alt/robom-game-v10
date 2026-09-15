@@ -83,35 +83,6 @@ h1{font-size:clamp(30px,5vw,46px);letter-spacing:-1.5px;margin:0 0 8px}
   .grid{grid-template-columns:1fr}.hero{padding:25px 21px}.game{min-height:190px}
 }
 
-/* Autumn 2026 theme */
-html,body{background:#17110d}
-body{background:radial-gradient(circle at 15% 8%,rgba(205,122,44,.20),transparent 30%),radial-gradient(circle at 85% 12%,rgba(126,74,38,.16),transparent 28%),linear-gradient(145deg,#17110d,#21150f 52%,#0f0b08)}
-body:before{opacity:.12;background-image:radial-gradient(#f4c38b 1px,transparent 1px);background-size:42px 42px}
-:root{--bg:#17110d;--panel:rgba(43,28,19,.84);--panel2:rgba(55,34,21,.9);--line:rgba(218,145,72,.28);--purple:#c9823d;--pink:#e0a05b;--text:#fff8ef;--muted:#c1aa94;--good:#83d39e}
-.btn{background:linear-gradient(135deg,#a85f29,#d18a45);box-shadow:0 10px 28px rgba(181,101,38,.2)}
-.btn:hover{box-shadow:0 14px 35px rgba(181,101,38,.32)}
-.input{background:#120d09;border-color:#5a3b27}.input:focus{border-color:#d18a45;box-shadow:0 0 0 3px rgba(209,138,69,.12)}
-.box,.game,.wallet,.exchange{background:linear-gradient(145deg,rgba(48,31,21,.93),rgba(20,14,10,.93));border-color:var(--line)}
-.hero{background:linear-gradient(125deg,rgba(75,43,24,.96),rgba(34,23,16,.92) 60%,rgba(57,32,18,.94));border-color:rgba(218,145,72,.28)}
-.hero:after{background:radial-gradient(circle,rgba(218,126,55,.30),transparent 68%)}
-.heroTag{background:rgba(214,135,65,.13);border-color:rgba(214,135,65,.28);color:#f1c28e}
-.hero h1{color:#fff4e7}
-.game:before{background:radial-gradient(circle,rgba(201,125,57,.18),transparent 70%)}
-.game:hover{border-color:rgba(218,145,72,.52)}
-.gameIcon{background:linear-gradient(145deg,rgba(205,130,57,.20),rgba(143,78,34,.10));border-color:rgba(218,145,72,.22)}
-.dev{border-color:rgba(224,160,91,.28)}
-.dev .gameIcon{background:linear-gradient(145deg,rgba(224,160,91,.18),rgba(177,91,37,.08))}
-.exit,.exchangeBtn,.back{background:#3a281d}
-.exit:hover,.exchangeBtn:hover,.back:hover{background:#4b3222}
-.recovery a{color:#e2a768}
-.fallingLeaf{position:fixed;top:-40px;z-index:4;pointer-events:none;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25))}
-.leafGame{grid-column:1/-1;min-height:180px}
-.leafPlay{text-align:center}.leafArena{height:380px;max-width:700px;margin:18px auto;border:2px solid rgba(224,160,91,.35);border-radius:22px;position:relative;overflow:hidden;background:linear-gradient(180deg,#39291f,#21160f)}
-.leafArena:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 25%,rgba(222,157,88,.13),transparent 50%)}
-.catchLeaf{position:absolute;border:0;background:transparent;font-size:42px;cursor:pointer;z-index:2}.catchLeaf:hover{transform:scale(1.18) rotate(10deg)}
-.secretLeaf{position:fixed;right:13px;bottom:10px;font-size:18px;opacity:.45;cursor:pointer;transition:.2s}.secretLeaf:hover{opacity:1;transform:rotate(20deg) scale(1.2)}
-@media(max-width:720px){.grid{grid-template-columns:1fr}.leafGame{grid-column:auto}.head{align-items:flex-start;flex-direction:column}.wallet{width:100%;justify-content:flex-start}.leafArena{height:330px}}
-
 /* v10 — simple anniversary redesign, no animations */
 .anniversaryWrap{max-width:1120px}
 .anniversaryHero{padding:34px 34px 30px;text-align:center;background:linear-gradient(135deg,#4a2418 0%,#24130e 48%,#3b1f31 100%);border:2px solid rgba(235,177,92,.45);box-shadow:0 18px 55px rgba(0,0,0,.34)}
@@ -126,3 +97,93 @@ body:before{opacity:.12;background-image:radial-gradient(#f4c38b 1px,transparent
 .anniversaryGame .btn{background:linear-gradient(135deg,#9c5125,#d08b42)}
 .anniversaryFooter{margin:18px 0 0;padding:17px 20px;border-radius:18px;background:#24150f;border:1px solid rgba(235,177,92,.28);display:flex;justify-content:center;gap:12px;flex-wrap:wrap;text-align:center;color:#f1d4ae}
 .anniversaryFooter span{color:#a98c74}
+
+/* v10 праздничный стиль — без анимаций */
+body{
+  background:
+    radial-gradient(circle at 8% 6%,rgba(213,126,47,.22),transparent 25%),
+    radial-gradient(circle at 92% 8%,rgba(155,67,42,.20),transparent 27%),
+    linear-gradient(145deg,#1a100b 0%,#2b170e 48%,#17100d 100%);
+}
+.anniversaryWrap{max-width:1160px}
+.anniversaryWrap .head{
+  padding:14px 16px;
+  margin-bottom:18px;
+  border:1px solid rgba(224,160,91,.38);
+  border-radius:18px;
+  background:linear-gradient(90deg,#352016,#24150f);
+}
+.anniversaryWrap .wallet{background:#1d120d;border-color:rgba(224,160,91,.3)}
+.anniversaryWrap .coin{background:#302016;border-color:rgba(224,160,91,.22);color:#ffe3bd}
+.anniversaryHero{
+  min-height:390px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:30px 25px;
+  background:
+    linear-gradient(135deg,rgba(87,45,23,.98),rgba(35,19,12,.98) 48%,rgba(73,34,27,.98)),
+    #2b170e;
+  border:2px solid #d49a52;
+  box-shadow:0 18px 55px rgba(0,0,0,.38);
+}
+.anniversaryHero:before{
+  content:"🎂  ✦  🎉  ✦  🔟  ✦  🎁  ✦  🎉";
+  display:block;
+  font-size:18px;
+  letter-spacing:8px;
+  color:#e8b36c;
+  margin-bottom:10px;
+}
+.anniversaryHero:after{display:none}
+.anniversaryBadge{
+  background:#6f3c20;border-color:#e0a05b;color:#ffe5bd;
+}
+.anniversaryNumber{
+  margin:18px 0 10px;
+  color:#f2bd69;
+  text-shadow:6px 7px 0 #5b2d1e;
+  border:3px solid #d99a50;
+  width:190px;height:190px;border-radius:50%;
+  display:grid;place-items:center;
+  background:radial-gradient(circle,#6b3820 0%,#321b12 68%);
+}
+.anniversaryHero h1{color:#fff1dc}
+.anniversaryHero p{color:#d8b99b}
+.anniversaryInfo span{
+  background:#3a2115;border-color:rgba(224,160,91,.4);color:#f5d3a5;
+}
+.sectionTitle{
+  padding:14px 16px;
+  border-radius:16px;
+  background:#2b180f;
+  border:1px solid rgba(224,160,91,.28);
+}
+.sectionTitle h2{color:#ffe4bd}.sectionTitle span{color:#c19b79}
+.grid{gap:14px}
+.anniversaryGame{
+  min-height:215px;
+  background:linear-gradient(145deg,#3b2316,#21130d);
+  border:1px solid rgba(224,160,91,.38);
+}
+.anniversaryGame h2{color:#ffe9ca}
+.anniversaryGame p{color:#c9a889}
+.anniversaryGame .gameIcon{
+  background:#512b19;border-color:#c98643;
+}
+.anniversaryGame .btn{
+  background:linear-gradient(135deg,#a85c27,#d89447);
+}
+.dev{background:linear-gradient(145deg,#402018,#24120e);border-color:#b86d4a}
+.soon{opacity:.72}
+.anniversaryFooter{
+  margin-top:16px;
+  padding:20px;
+  background:linear-gradient(90deg,#3a2115,#24140e);
+  border:2px solid rgba(224,160,91,.36);
+  color:#ffe1b4;
+}
+
+@media(max-width:700px){
+ .anniversaryHero{min-height:350px;padding:25px 18px}
+ .anniversaryNumber{width:155px;height:155px;font-size:100px}
+ .anniversaryWrap .head{padding:12px}
+}
