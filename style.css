@@ -82,3 +82,33 @@ h1{font-size:clamp(30px,5vw,46px);letter-spacing:-1.5px;margin:0 0 8px}
   .head{display:block;margin-bottom:22px}.wallet{justify-content:flex-start;margin-top:13px}
   .grid{grid-template-columns:1fr}.hero{padding:25px 21px}.game{min-height:190px}
 }
+
+/* Autumn 2026 theme */
+html,body{background:#17110d}
+body{background:radial-gradient(circle at 15% 8%,rgba(205,122,44,.20),transparent 30%),radial-gradient(circle at 85% 12%,rgba(126,74,38,.16),transparent 28%),linear-gradient(145deg,#17110d,#21150f 52%,#0f0b08)}
+body:before{opacity:.12;background-image:radial-gradient(#f4c38b 1px,transparent 1px);background-size:42px 42px}
+:root{--bg:#17110d;--panel:rgba(43,28,19,.84);--panel2:rgba(55,34,21,.9);--line:rgba(218,145,72,.28);--purple:#c9823d;--pink:#e0a05b;--text:#fff8ef;--muted:#c1aa94;--good:#83d39e}
+.btn{background:linear-gradient(135deg,#a85f29,#d18a45);box-shadow:0 10px 28px rgba(181,101,38,.2)}
+.btn:hover{box-shadow:0 14px 35px rgba(181,101,38,.32)}
+.input{background:#120d09;border-color:#5a3b27}.input:focus{border-color:#d18a45;box-shadow:0 0 0 3px rgba(209,138,69,.12)}
+.box,.game,.wallet,.exchange{background:linear-gradient(145deg,rgba(48,31,21,.93),rgba(20,14,10,.93));border-color:var(--line)}
+.hero{background:linear-gradient(125deg,rgba(75,43,24,.96),rgba(34,23,16,.92) 60%,rgba(57,32,18,.94));border-color:rgba(218,145,72,.28)}
+.hero:after{background:radial-gradient(circle,rgba(218,126,55,.30),transparent 68%)}
+.heroTag{background:rgba(214,135,65,.13);border-color:rgba(214,135,65,.28);color:#f1c28e}
+.hero h1{color:#fff4e7}
+.game:before{background:radial-gradient(circle,rgba(201,125,57,.18),transparent 70%)}
+.game:hover{border-color:rgba(218,145,72,.52)}
+.gameIcon{background:linear-gradient(145deg,rgba(205,130,57,.20),rgba(143,78,34,.10));border-color:rgba(218,145,72,.22)}
+.dev{border-color:rgba(224,160,91,.28)}
+.dev .gameIcon{background:linear-gradient(145deg,rgba(224,160,91,.18),rgba(177,91,37,.08))}
+.exit,.exchangeBtn,.back{background:#3a281d}
+.exit:hover,.exchangeBtn:hover,.back:hover{background:#4b3222}
+.recovery a{color:#e2a768}
+.fallingLeaf{position:fixed;top:-40px;z-index:4;pointer-events:none;animation:leafFall linear infinite;filter:drop-shadow(0 4px 4px rgba(0,0,0,.25))}
+@keyframes leafFall{0%{transform:translate3d(0,-40px,0) rotate(0deg);opacity:0}10%{opacity:.9}50%{transform:translate3d(80px,55vh,0) rotate(180deg)}100%{transform:translate3d(-70px,110vh,0) rotate(360deg);opacity:.1}}
+.leafGame{grid-column:1/-1;min-height:180px}
+.leafPlay{text-align:center}.leafArena{height:380px;max-width:700px;margin:18px auto;border:2px solid rgba(224,160,91,.35);border-radius:22px;position:relative;overflow:hidden;background:linear-gradient(180deg,#39291f,#21160f)}
+.leafArena:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 25%,rgba(222,157,88,.13),transparent 50%)}
+.catchLeaf{position:absolute;border:0;background:transparent;font-size:42px;cursor:pointer;transition:transform .12s;z-index:2}.catchLeaf:hover{transform:scale(1.18) rotate(10deg)}
+.secretLeaf{position:fixed;right:13px;bottom:10px;font-size:18px;opacity:.45;cursor:pointer;transition:.2s}.secretLeaf:hover{opacity:1;transform:rotate(20deg) scale(1.2)}
+@media(max-width:720px){.grid{grid-template-columns:1fr}.leafGame{grid-column:auto}.head{align-items:flex-start;flex-direction:column}.wallet{width:100%;justify-content:flex-start}.leafArena{height:330px}}
