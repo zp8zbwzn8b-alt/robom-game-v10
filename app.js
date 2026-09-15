@@ -13,7 +13,39 @@ if(!found){for(const account of candidates){const accountName=String(account.nam
 if(!found)return alert("Неверный никнейм или пароль. Нажми «Показать пароль» и проверь ввод.");
 u={name:String(found.name||name).trim(),email:String(found.email||"").trim().toLowerCase(),pass:String(found.pass??found.password??p),tokens:Number(found.tokens)||0,robom:Number(found.robom)||0};save();home()}
 function head(){return `<div class="head"><div><b>Привет, ${u.name}! 👋</b></div><div class="wallet"><span class="coin">🪙 Токены: ${u.tokens}</span><span class="coin">💠 Робом: ${u.robom}</span><button class="exchangeBtn" onclick="exchange()">Обмен</button><button class="exit" onclick="stopTimers();u=null;auth()">Выйти</button></div></div>`}
-function home(){stopTimers();app.innerHTML=`<div class="wrap autumnWrap">${head()}<section class="hero autumnHero"><span class="heroTag">🍂 ROBOM GAMES</span><h1>Осень пришла. 🍁</h1><p>Играй. Зарабатывай. И не забывай наслаждаться осенью.</p><div class="autumnGlow"></div></section><div class="sectionTitle"><h2>🎮 Игры</h2><span>Выбери свой режим</span></div><div class="grid"><div class="game autumnGame"><div class="gameTop"><div><h2>🏐 Волейбол</h2><p>Играй в арене и получай +1 Токен каждые 30 секунд.</p></div><div class="gameIcon">🏐</div></div><button class="btn" onclick="volley()">Играть</button></div><div class="game autumnGame"><div class="gameTop"><div><h2>⚽ Набивание мяча</h2><p>Проверяй скорость и получай +1 Токен каждую секунду.</p></div><div class="gameIcon">⚽</div></div><button class="btn" onclick="kick()">Играть</button></div><div class="game soon autumnGame"><div class="gameTop"><div><h2>🏀 Баскетбол</h2><p>Новый режим уже в разработке. Скоро здесь будет жарко.</p></div><div class="gameIcon">🏀</div></div><button class="btn" disabled>Скоро будет</button></div><div class="game dev autumnGame"><div class="gameTop"><div><h2>🛠️ Для разработчиков</h2><p>Служебная панель для управления валютой аккаунта.</p></div><div class="gameIcon">🛠️</div></div><button class="btn" onclick="developerLogin()">Открыть</button></div><div class="game autumnGame leafGame"><div class="gameTop"><div><h2>🍂 Листопад</h2><p>Лови падающие листья и собирай осенние очки.</p></div><div class="gameIcon">🍁</div></div><button class="btn" onclick="leafGame()">Играть</button></div></div><p class="small recovery">Потеряли аккаунт? Напишите на <a href="mailto:gamedevelover@tokman.net">gamedevelover@tokman.net</a></p><p class="small" style="text-align:center;opacity:.55;margin-top:14px">Robom Games v9 • Осень</p><div id="secretLeaf" class="secretLeaf" onclick="autumnSecret()">🍂</div></div>`;startLeafFall()}
+
+function startAnniversaryCelebration(){
+  document.body.classList.add("anniversary");
+  document.querySelectorAll(".confettiPiece").forEach(e=>e.remove());
+  const pieces=["🎉","✨","🎊","⭐","🥳","💫"];
+  for(let i=0;i<24;i++){
+    const e=document.createElement("div");
+    e.className="confettiPiece";
+    e.textContent=pieces[i%pieces.length];
+    e.style.left=(Math.random()*100)+"vw";
+    e.style.fontSize=(12+Math.random()*18)+"px";
+    e.style.animationDuration=(3.5+Math.random()*4)+"s";
+    e.style.animationDelay=(Math.random()*2)+"s";
+    e.style.setProperty("--drift",(-80+Math.random()*160)+"px");
+    document.body.appendChild(e);
+  }
+}
+function anniversaryFirework(){
+  const e=document.createElement("div");
+  e.className="firework";
+  e.style.left=(15+Math.random()*70)+"vw";
+  e.style.top=(12+Math.random()*42)+"vh";
+  e.style.color=["#ffd54a","#ff7eb6","#8be9fd","#b6ff7d"][Math.floor(Math.random()*4)];
+  document.body.appendChild(e);
+  setTimeout(()=>e.remove(),950);
+}
+function anniversaryGame(){
+  startAnniversaryCelebration();
+  for(let i=0;i<7;i++) setTimeout(anniversaryFirework,i*420);
+  alert("🎉 С юбилеем Robom Games!\n\nСпасибо, что ты с нами! 🥳\n\nПраздничный салют запущен 🎆");
+}
+
+function home(){stopTimers();app.innerHTML=`<div class="wrap autumnWrap">${head()}<section class="hero autumnHero"><span class="heroTag">🍂 ROBOM GAMES</span><h1>Осень пришла. 🍁</h1><p>Играй. Зарабатывай. И не забывай наслаждаться осенью.</p><div class="autumnGlow"></div></section><div class="sectionTitle"><h2>🎮 Игры</h2><span>Выбери свой режим</span></div><div class="grid"><div class="game autumnGame"><div class="gameTop"><div><h2>🏐 Волейбол</h2><p>Играй в арене и получай +1 Токен каждые 30 секунд.</p></div><div class="gameIcon">🏐</div></div><button class="btn" onclick="volley()">Играть</button></div><div class="game autumnGame"><div class="gameTop"><div><h2>⚽ Набивание мяча</h2><p>Проверяй скорость и получай +1 Токен каждую секунду.</p></div><div class="gameIcon">⚽</div></div><button class="btn" onclick="kick()">Играть</button></div><div class="game soon autumnGame"><div class="gameTop"><div><h2>🏀 Баскетбол</h2><p>Новый режим уже в разработке. Скоро здесь будет жарко.</p></div><div class="gameIcon">🏀</div></div><button class="btn" disabled>Скоро будет</button></div><div class="game dev autumnGame"><div class="gameTop"><div><h2>🛠️ Для разработчиков</h2><p>Служебная панель для управления валютой аккаунта.</p></div><div class="gameIcon">🛠️</div></div><button class="btn" onclick="developerLogin()">Открыть</button></div><div class="game autumnGame leafGame"><div class="gameTop"><div><h2>🍂 Листопад</h2><p>Лови падающие листья и собирай осенние очки.</p></div><div class="gameIcon">🍁</div></div><button class="btn" onclick="leafGame()">Играть</button></div></div><p class="small recovery">Потеряли аккаунт? Напишите на <a href="mailto:gamedevelover@tokman.net">gamedevelover@tokman.net</a></p><p class="small" style="text-align:center;opacity:.55;margin-top:14px">Robom Games v10 • Юбилей</p><div id="secretLeaf" class="secretLeaf" onclick="autumnSecret()">🍂</div></div>`;startLeafFall()}
 function startLeafFall(){document.querySelectorAll('.fallingLeaf').forEach(e=>e.remove());for(let i=0;i<18;i++){const el=document.createElement('div');el.className='fallingLeaf';el.textContent=['🍂','🍁','🍃'][i%3];el.style.left=(Math.random()*100)+'vw';el.style.animationDelay=(Math.random()*8)+'s';el.style.animationDuration=(7+Math.random()*7)+'s';el.style.fontSize=(14+Math.random()*18)+'px';document.body.appendChild(el)}}
 function leafGame(){stopTimers();gameScore=0;app.innerHTML=`<div class="wrap play leafPlay">${head()}<button class="back" onclick="home()">← Меню</button><h1>🍂 Листопад</h1><div class="status">Собрано: <b id="score">0</b></div><div class="status">🪙 Токенов: <b id="tokens">${u.tokens}</b></div><div class="timer">⏱️ <b id="time">00:00</b></div><button id="start" class="btn" onclick="toggleLeaf()">Начать</button><div id="leafArena" class="leafArena"></div></div>`;spawnLeaf()}
 function spawnLeaf(){const a=document.querySelector('#leafArena');if(!a)return;a.querySelectorAll('.catchLeaf').forEach(e=>e.remove());const e=document.createElement('button');e.className='catchLeaf';e.textContent=['🍂','🍁','🍃'][Math.floor(Math.random()*3)];e.style.left=(Math.random()*82+5)+'%';e.style.top=(Math.random()*70+8)+'%';e.onclick=()=>{if(gameRunning){gameScore++;document.querySelector('#score').textContent=gameScore;spawnLeaf()}};a.appendChild(e)}
