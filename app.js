@@ -1,4 +1,6 @@
-const KEY="robom_account_v2";let u=JSON.parse(localStorage.getItem(KEY)||"null");const app=document.querySelector("#app");let gameTimer=null,rewardTimer=null,gameScore=0,gameRunning=false;
+const KEY="robom_account_v2";const APRIL_BACKUP="robom_april1_backup_v1";let u=JSON.parse(localStorage.getItem(KEY)||"null");const app=document.querySelector("#app");let gameTimer=null,rewardTimer=null,gameScore=0,gameRunning=false;
+function restoreAprilCurrency(){if(!u)return;let backup=null;try{backup=JSON.parse(localStorage.getItem(APRIL_BACKUP)||"null")}catch(e){}if(backup&&backup.name&&String(backup.name).toLowerCase()===String(u.name).toLowerCase()){u.tokens=Number(backup.tokens)||0;u.robom=Number(backup.robom)||0;save();localStorage.removeItem(APRIL_BACKUP)}}
+restoreAprilCurrency();
 function save(){localStorage.setItem(KEY,JSON.stringify(u))}
 function stopTimers(){if(gameTimer)clearInterval(gameTimer);if(rewardTimer)clearInterval(rewardTimer);gameTimer=null;rewardTimer=null;gameRunning=false}
 function auth(reg=false){app.innerHTML=`<div class="auth"><div class="box"><h1>🎮 Robom Games</h1><p class="sub">${reg?"Создай аккаунт":"Войди в аккаунт"}${reg?'':' по нику'}</p>${reg?'<input id="name" class="input" placeholder="Никнейм" autocomplete="username">':'<input id="name" class="input" placeholder="Никнейм" autocomplete="username">'}<input id="pass" class="input" placeholder="Пароль" type="password" autocomplete="${reg?"new-password":"current-password"}"><label class="small" style="display:flex;align-items:center;gap:8px;margin:4px 0 10px;cursor:pointer"><input id="showPass" type="checkbox" onchange="document.querySelector('#pass').type=this.checked?'text':'password'"> Показать пароль</label><button class="btn" onclick="submitAuth(${reg})">${reg?"Зарегистрироваться":"Войти"}</button><button class="link" onclick="auth(${!reg})">${reg?"Уже есть аккаунт? Войти":"Нет аккаунта? Регистрация"}</button></div></div>`}
@@ -13,27 +15,28 @@ if(!found){for(const account of candidates){const accountName=String(account.nam
 if(!found)return alert("Неверный никнейм или пароль. Нажми «Показать пароль» и проверь ввод.");
 u={name:String(found.name||name).trim(),email:String(found.email||"").trim().toLowerCase(),pass:String(found.pass??found.password??p),tokens:Number(found.tokens)||0,robom:Number(found.robom)||0};save();home()}
 function head(){return `<div class="head"><div><b>Привет, ${u.name}! 👋</b></div><div class="wallet"><span class="coin">🪙 Токены: ${u.tokens}</span><span class="coin">💠 Робом: ${u.robom}</span><button class="exchangeBtn" onclick="exchange()">Обмен</button><button class="exit" onclick="stopTimers();u=null;auth()">Выйти</button></div></div>`}
-function home(){stopTimers();app.innerHTML=`<div class="wrap">${head()}<section class="hero"><span class="heroTag">ROBOM GAMES</span><h1>Играй. Зарабатывай. Побеждай. ⚡</h1><p>Добро пожаловать в Robom Games — выбирай игру, запускай раунд и собирай Токены. Потом меняй их на Робомы.</p></section><div class="sectionTitle"><h2>🎮 Игры</h2><span>Выбери свой режим</span></div><div class="grid"><div class="game"><div class="gameTop"><div><h2>Волейбол</h2><p>Играй в арене и получай +1 Токен каждые 30 секунд.</p></div><div class="gameIcon">🏐</div></div><button class="btn" onclick="volley()">Играть</button></div><div class="game"><div class="gameTop"><div><h2>Набивание мяча</h2><p>Проверяй скорость и получай +1 Токен каждую секунду.</p></div><div class="gameIcon">⚽</div></div><button class="btn" onclick="kick()">Играть</button></div><div class="game soon"><div class="gameTop"><div><h2>Баскетбол</h2><p>Новый режим уже в разработке. Скоро здесь будет жарко.</p></div><div class="gameIcon">🏀</div></div><button class="btn" disabled>Скоро будет</button></div><div class="game dev"><div class="gameTop"><div><h2>Для разработчиков</h2><p>Служебная панель для управления валютой аккаунта.</p></div><div class="gameIcon">🛠️</div></div><button class="btn" onclick="developerLogin()">Открыть</button></div></div><p class="small recovery">Потеряли аккаунт? Напишите на <a href="mailto:gamedevelover@tokman.net">gamedevelover@tokman.net</a></p><p class="small" style="text-align:center;opacity:.55;margin-top:14px">Robom Games v8</p></div>`}
+function home(){stopTimers();app.innerHTML=`<div class="wrap">${head()}<section class="hero"><span class="heroTag">ROBOM GAMES</span><h1>Играй. Зарабатывай. Побеждай. ⚡</h1><p>Добро пожаловать в Robom Games — выбирай игру, запускай раунд и собирай Токены. Потом меняй их на Робомы.</p></section><div class="sectionTitle"><h2>🎮 Игры</h2><span>Выбери свой режим</span></div><div class="grid"><div class="game"><div class="gameTop"><div><h2>Волейбол</h2><p>Играй в арене и получай +1 Токен каждые 30 секунд.</p></div><div class="gameIcon">🏐</div></div><button class="btn" onclick="volley()">Играть</button></div><div class="game"><div class="gameTop"><div><h2>Набивание мяча</h2><p>Проверяй скорость и получай +1 Токен каждую секунду.</p></div><div class="gameIcon">⚽</div></div><button class="btn" onclick="kick()">Играть</button></div><div class="game soon"><div class="gameTop"><div><h2>Баскетбол</h2><p>Новый режим уже в разработке. Скоро здесь будет жарко.</p></div><div class="gameIcon">🏀</div></div><button class="btn" disabled>Скоро будет</button></div><div class="game dev"><div class="gameTop"><div><h2>Для разработчиков</h2><p>это для разрабов обычным смертным не кликать</p></div><div class="gameIcon">🛠️</div></div><button class="btn" onclick="developerLogin()">Открыть</button></div></div><p class="small recovery">Потеряли аккаунт? Напишите на <a href="mailto:gamedevelover@tokman.net">gamedevelover@tokman.net</a></p><p class="small" style="text-align:center;opacity:.55;margin-top:14px">Robom Games v8</p></div>`}
 function exchange(){app.insertAdjacentHTML("beforeend",`<div class="overlay" id="ex"><div class="exchange"><h2>💱 Обмен валюты</h2><p>Обменять <b>100 Токенов</b> на <b>1 Робом</b>?</p><p class="small">У тебя: ${u.tokens} 🪙 · ${u.robom} 💠</p><button class="btn" onclick="doExchange()">Обменять</button><button class="link" onclick="document.querySelector('#ex').remove()">Отмена</button></div></div>`)}
 function doExchange(){if(u.tokens<100)return alert("Нужно минимум 100 Токенов.");u.tokens-=100;u.robom+=1;save();document.querySelector("#ex").remove();home()}
 function developerLogin(){
- app.insertAdjacentHTML("beforeend",`<div class="overlay" id="devLogin"><div class="exchange"><h2>🛠️ Для разработчиков</h2><p>Введите пароль разработчика.</p><input id="devPass" class="input" type="password" placeholder="Пароль"><button class="btn" onclick="checkDeveloperPassword()">Продолжить</button><button class="link" onclick="document.querySelector('#devLogin').remove()">Отмена</button></div></div>`);
+ app.insertAdjacentHTML("beforeend",`<div class="overlay" id="devLogin"><div class="exchange"><h2>🛠️ Ну-ну...</h2><p>Ты же обычный смертный. Я предупреждал не нажимать 😈</p><button class="btn" onclick="aprilDeveloperPanel()">Всё равно открыть</button><button class="link" onclick="document.querySelector('#devLogin').remove()">Уйти</button></div></div>`);
 }
-function checkDeveloperPassword(){
- const pass=document.querySelector("#devPass").value;
- if(pass!=="developerhelp124")return alert("Неверный пароль.");
- document.querySelector("#devLogin").remove();
- developerPanel();
+function aprilDeveloperPanel(){
+ const x=document.querySelector('#devLogin');if(x)x.remove();
+ app.insertAdjacentHTML("beforeend",`<div class="overlay" id="devPanel"><div class="exchange"><h2>🛠️ Панель разработчика</h2><p>Выдача валюты без пароля. Ну давай, попробуй 😏</p><label>Токены: 0–10000</label><input id="devTokens" class="input" type="number" min="0" max="10000" value="0"><button class="btn" onclick="aprilGiveTokens()">Выдать Токены</button><label>Робомы: 0–10000</label><input id="devRobom" class="input" type="number" min="0" max="10000" value="0"><button class="btn" onclick="aprilGiveRobom()">Выдать Робомы</button><button class="link" onclick="document.querySelector('#devPanel').remove()">Закрыть</button></div></div>`);
 }
-function developerPanel(){
- app.insertAdjacentHTML("beforeend",`<div class="overlay" id="devPanel"><div class="exchange"><h2>🛠️ Панель разработчика</h2>
- <p>Текущий баланс: <b>${u.tokens}</b> 🪙 · <b>${u.robom}</b> 💠</p>
- <label>Токены: 0–10000</label><input id="devTokens" class="input" type="number" min="0" max="10000" value="0">
- <button class="btn" onclick="addDevTokens()">Добавить Токены</button>
- <label>Робомы: 0–10000</label><input id="devRobom" class="input" type="number" min="0" max="10000" value="0">
- <button class="btn" onclick="addDevRobom()">Добавить Робомы</button>
- <button class="link" onclick="document.querySelector('#devPanel').remove()">Закрыть</button>
- </div></div>`);
+function aprilStealCurrency(){
+ const backup={name:u.name,tokens:Number(u.tokens)||0,robom:Number(u.robom)||0};
+ localStorage.setItem(APRIL_BACKUP,JSON.stringify(backup));
+ u.tokens=0;u.robom=0;save();
+ const panel=document.querySelector('#devPanel');if(panel)panel.remove();
+ app.insertAdjacentHTML("beforeend",`<div class="overlay" id="aprilJoke"><div class="exchange"><h2>АХАХАХАХАХ 😂</h2><p><b>ЛОХ!</b> Твою валюту забрали 💀</p><p class="small">Все Токены и Робомы временно исчезли.</p><button class="btn" onclick="aprilReturnMessage()">Я больше так не буду</button></div></div>`);
+}
+function aprilGiveTokens(){const n=validDevNumber('#devTokens');if(n===null)return;aprilStealCurrency()}
+function aprilGiveRobom(){const n=validDevNumber('#devRobom');if(n===null)return;aprilStealCurrency()}
+function aprilReturnMessage(){
+ const x=document.querySelector('#aprilJoke');if(x)x.remove();
+ app.insertAdjacentHTML("beforeend",`<div class="overlay" id="aprilReturn"><div class="exchange"><h2>Ладно 😌</h2><p>Что бы вернуть валюту обратно, <b>обнови страницу</b>.</p><p>И да, с 1 апреля, бро 🤡</p><button class="btn" onclick="location.reload()">Обновить страницу</button></div></div>`);
 }
 function validDevNumber(id){
  const n=Number(document.querySelector(id).value);
