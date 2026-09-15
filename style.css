@@ -160,3 +160,130 @@ body.anniversary{
   box-shadow:0 0 12px 4px currentColor;
 }
 @keyframes firework{0%{transform:scale(.2);opacity:1}100%{transform:scale(16);opacity:0}}
+
+/* ===== V10 COMPLETE ANNIVERSARY REDESIGN ===== */
+body.anniversary{
+  background:#0b0812;
+  color:#fff;
+  overflow-x:hidden;
+}
+body.anniversary:before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:
+    radial-gradient(circle at 50% -5%,rgba(255,210,80,.24),transparent 32%),
+    radial-gradient(circle at 0 55%,rgba(145,75,255,.16),transparent 35%),
+    radial-gradient(circle at 100% 75%,rgba(255,70,150,.12),transparent 30%);
+}
+.anniversary .wrap{max-width:1100px}
+.anniversary .head{
+  background:rgba(15,10,25,.86);
+  border:1px solid rgba(255,215,100,.22);
+  box-shadow:0 10px 35px rgba(0,0,0,.28);
+  backdrop-filter:blur(16px);
+}
+.anniversary .hero.anniversaryHero{
+  min-height:390px;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+  margin-top:20px;
+  border-radius:30px!important;
+  background:
+    radial-gradient(circle at 50% 40%,rgba(255,205,70,.13),transparent 27%),
+    linear-gradient(145deg,rgba(37,21,57,.96),rgba(15,12,25,.96));
+  border:1px solid rgba(255,213,80,.32)!important;
+  box-shadow:inset 0 0 90px rgba(255,193,7,.035),0 25px 80px rgba(0,0,0,.3);
+}
+.anniversary .anniversaryHero h1{
+  font-size:clamp(42px,8vw,82px);
+  line-height:.98;margin:18px 0 12px;
+  text-shadow:0 0 35px rgba(255,203,67,.16);
+}
+.anniversary .anniversaryBadge{position:relative;z-index:2}
+.anniversaryNumber{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  font-size:clamp(210px,34vw,390px);font-weight:1000;line-height:1;
+  color:rgba(255,210,70,.035);
+  -webkit-text-stroke:2px rgba(255,210,70,.08);
+  pointer-events:none;
+}
+.anniversary .anniversaryHero>*:not(.anniversaryNumber){position:relative;z-index:2}
+.anniversaryRibbon{
+  margin:20px auto;max-width:920px;
+  padding:18px 24px;border-radius:22px;text-align:center;
+  background:linear-gradient(90deg,rgba(255,198,60,.1),rgba(173,91,255,.1),rgba(255,85,155,.1));
+  border:1px solid rgba(255,255,255,.12);
+  font-size:15px;
+}
+.anniversaryRibbon b{color:#ffd85a}
+.anniversary .sectionTitle{
+  display:flex;align-items:end;justify-content:space-between;
+  margin-top:34px;
+}
+.anniversary .sectionTitle h2{font-size:28px}
+.anniversary .grid{
+  gap:18px;
+}
+.anniversary .card{
+  position:relative;overflow:hidden;
+  background:linear-gradient(145deg,rgba(34,23,49,.92),rgba(17,14,25,.96));
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;
+  box-shadow:0 15px 40px rgba(0,0,0,.22);
+  transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.anniversary .card:before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(120deg,rgba(255,210,70,.055),transparent 42%);
+}
+.anniversary .card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(255,213,90,.32);
+  box-shadow:0 20px 55px rgba(0,0,0,.34);
+}
+.anniversary .card .icon{font-size:38px}
+.anniversary .card h2{position:relative}
+.anniversary .btn{
+  background:linear-gradient(135deg,#ffd34d,#ff9e3d);
+  color:#241506;font-weight:900;
+  border:0;box-shadow:0 8px 22px rgba(255,181,58,.16);
+}
+.anniversary .btn:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.anniversaryBalance{
+  display:flex;gap:10px;flex-wrap:wrap;margin:16px 0 4px;
+}
+.anniversaryBalance span{
+  padding:8px 12px;border-radius:12px;
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.08);
+}
+.anniversaryBalance b{color:#ffd75b}
+.anniversaryFeature{
+  grid-column:1/-1;
+  min-height:155px;
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  background:linear-gradient(120deg,rgba(255,192,50,.12),rgba(124,78,255,.1),rgba(255,77,143,.08))!important;
+  border-color:rgba(255,211,84,.28)!important;
+}
+.anniversaryFeature .featureText{position:relative;z-index:1}
+.anniversaryFeature .feature10{
+  font-size:150px;font-weight:1000;line-height:.7;
+  color:rgba(255,214,78,.12);
+  text-shadow:0 0 50px rgba(255,193,7,.12);
+}
+.anniversarySecret{
+  margin:28px 0;padding:16px;text-align:center;border-radius:18px;
+  color:#a99eb9;font-size:12px;
+}
+.anniversarySecret button{
+  background:none;border:0;color:#6f647c;cursor:pointer;font-size:12px;
+}
+.anniversarySecret button:hover{color:#ffd65b}
+.anniversary .fallingLeaf{filter:saturate(.7);opacity:.4}
+@media(max-width:650px){
+ .anniversary .hero.anniversaryHero{min-height:330px;padding:25px 16px}
+ .anniversary .anniversaryHero h1{font-size:45px}
+ .anniversaryNumber{font-size:210px}
+ .anniversaryFeature{display:block}
+ .anniversaryFeature .feature10{position:absolute;right:10px;bottom:5px}
+ .anniversary .sectionTitle{align-items:start;gap:8px;flex-direction:column}
+}
