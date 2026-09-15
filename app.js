@@ -13,112 +13,12 @@ if(!found){for(const account of candidates){const accountName=String(account.nam
 if(!found)return alert("Неверный никнейм или пароль. Нажми «Показать пароль» и проверь ввод.");
 u={name:String(found.name||name).trim(),email:String(found.email||"").trim().toLowerCase(),pass:String(found.pass??found.password??p),tokens:Number(found.tokens)||0,robom:Number(found.robom)||0};save();home()}
 function head(){return `<div class="head"><div><b>Привет, ${u.name}! 👋</b></div><div class="wallet"><span class="coin">🪙 Токены: ${u.tokens}</span><span class="coin">💠 Робом: ${u.robom}</span><button class="exchangeBtn" onclick="exchange()">Обмен</button><button class="exit" onclick="stopTimers();u=null;auth()">Выйти</button></div></div>`}
-
-function startAnniversaryCelebration(){
-  document.body.classList.add("anniversary");
-  document.querySelectorAll(".confettiPiece").forEach(e=>e.remove());
-  const pieces=["🎉","✨","🎊","⭐","🥳","💫","🎈"];
-  for(let i=0;i<34;i++){
-    const e=document.createElement("div");
-    e.className="confettiPiece";e.textContent=pieces[i%pieces.length];
-    e.style.left=(Math.random()*100)+"vw";
-    e.style.fontSize=(11+Math.random()*20)+"px";
-    e.style.animationDuration=(4+Math.random()*5)+"s";
-    e.style.animationDelay=(Math.random()*3)+"s";
-    e.style.setProperty("--drift",(-120+Math.random()*240)+"px");
-    document.body.appendChild(e);
-  }
-}
-function anniversaryFirework(){
-  const e=document.createElement("div");e.className="firework";
-  e.style.left=(10+Math.random()*80)+"vw";e.style.top=(10+Math.random()*45)+"vh";
-  e.style.color=["#ffd54a","#ff7eb6","#8be9fd","#b6ff7d","#c9a7ff"][Math.floor(Math.random()*5)];
-  document.body.appendChild(e);setTimeout(()=>e.remove(),950);
-}
-function anniversaryGame(){
-  startAnniversaryCelebration();
-  for(let i=0;i<12;i++)setTimeout(anniversaryFirework,i*300);
-  setTimeout(()=>alert("🎂 ЮБИЛЕЙ ROBOM GAMES! 🎉\n\n10-я версия уже здесь!\nСпасибо, что играешь ❤️"),900);
-}
-
-
-function home(){
-  stopTimers();
-  startAnniversaryCelebration();
-  app.innerHTML=`<div class="wrap autumnWrap">${head()}
-  <section class="hero anniversaryHero">
-    <div class="anniversaryNumber">10</div>
-    <div class="anniversaryStars"><span>✨</span><span>⭐</span><span>💫</span><span>✨</span></div>
-    <span class="anniversaryBadge">🎉 ЮБИЛЕЙНОЕ ОБНОВЛЕНИЕ • V10</span>
-    <h1>Нам уже 10! 🎂</h1>
-    <p class="anniversarySub">Robom Games празднует юбилей вместе с тобой.</p>
-  </section>
-
-  <div class="anniversaryRibbon">
-    🎊 <b>10-я версия</b> • Новый праздничный дизайн • Сюрпризы • Салюты • Спасибо, что ты с нами ❤️
-  </div>
-
-  <div class="sectionTitle"><h2>🎮 Игры</h2><span>Выбирай режим</span></div>
-  <div class="grid">
-    <div class="card anniversaryFeature">
-      <div class="featureText">
-        <div class="icon">🏆</div>
-        <h2>Юбилей Robom Games</h2>
-        <p>Сегодня особенный день. Запусти праздничный салют и отметь v10.</p>
-        <button class="btn" onclick="anniversaryGame()">🎆 Праздновать</button>
-      </div>
-      <div class="feature10">10</div>
-    </div>
-
-    <div class="card">
-      <div class="icon">🏐</div><h2>Волейбол</h2>
-      <p>Играй и получай Токены.</p>
-      <button class="btn" onclick="volleyball()">Играть</button>
-    </div>
-    <div class="card">
-      <div class="icon">⚽</div><h2>Набивание мяча</h2>
-      <p>Набивай мяч и зарабатывай быстрее.</p>
-      <button class="btn" onclick="juggling()">Играть</button>
-    </div>
-    <div class="card">
-      <div class="icon">🍂</div><h2>Листопад</h2>
-      <p>Лови падающие листья и собирай очки.</p>
-      <button class="btn" onclick="leafGame()">Играть</button>
-    </div>
-    <div class="card">
-      <div class="icon">🏀</div><h2>Баскетбол</h2>
-      <p>Новая игра уже в разработке.</p>
-      <button class="btn" disabled>Скоро</button>
-    </div>
-    <div class="card">
-      <div class="icon">🛠️</div><h2>Для разработчиков</h2>
-      <p>Служебная панель Robom Games.</p>
-      <button class="btn" onclick="developerLogin()">Открыть</button>
-    </div>
-  </div>
-
-  <div class="anniversaryBalance">
-    <span>🪙 Токены: <b>${u.tokens}</b></span>
-    <span>💠 Робомы: <b>${u.robom}</b></span>
-  </div>
-
-  <p class="small recovery">Потеряли аккаунт? Напишите на gamedevelover@tokman.net</p>
-  <p class="small" style="text-align:center">Robom Games v10 • Юбилей 🎉</p>
-  <div class="anniversarySecret"><button onclick="anniversarySecret()">🎁 не нажимать</button></div>
-  </div>`;
-  startLeafFall();
-}
-function anniversarySecret(){
-  startAnniversaryCelebration();
-  for(let i=0;i<5;i++)setTimeout(anniversaryFirework,i*350);
-  alert("🎁 Ты нашёл секрет юбилейной версии!\n\nС юбилеем Robom Games! 🎉");
-}
-
-function startLeafFall(){document.querySelectorAll('.fallingLeaf').forEach(e=>e.remove());for(let i=0;i<18;i++){const el=document.createElement('div');el.className='fallingLeaf';el.textContent=['🍂','🍁','🍃'][i%3];el.style.left=(Math.random()*100)+'vw';el.style.animationDelay=(Math.random()*8)+'s';el.style.animationDuration=(7+Math.random()*7)+'s';el.style.fontSize=(14+Math.random()*18)+'px';document.body.appendChild(el)}}
+function home(){stopTimers();app.innerHTML=`<div class="wrap anniversaryWrap">${head()}<section class="hero anniversaryHero"><div class="anniversaryBadge">🎂 10-Я ВЕРСИЯ</div><div class="anniversaryNumber" onclick="anniversarySecret()">10</div><h1>Юбилей Robom Games!</h1><p>Десятая версия уже здесь. Спасибо, что играете и следите за проектом. 🥳</p><div class="anniversaryInfo"><span>🎉 Праздничное обновление</span><span>🍂 Осенняя атмосфера</span><span>🎮 Все любимые игры на месте</span></div></section><div class="sectionTitle"><h2>🎮 Игры</h2><span>Юбилейное меню</span></div><div class="grid"><div class="game anniversaryGame"><div class="gameTop"><div><h2>🏐 Волейбол</h2><p>Играй в арене и получай +1 Токен каждые 30 секунд.</p></div><div class="gameIcon">🏐</div></div><button class="btn" onclick="volley()">Играть</button></div><div class="game anniversaryGame"><div class="gameTop"><div><h2>⚽ Набивание мяча</h2><p>Проверяй скорость и получай +1 Токен каждую секунду.</p></div><div class="gameIcon">⚽</div></div><button class="btn" onclick="kick()">Играть</button></div><div class="game soon anniversaryGame"><div class="gameTop"><div><h2>🏀 Баскетбол</h2><p>Новый режим уже в разработке. Скоро здесь будет жарко.</p></div><div class="gameIcon">🏀</div></div><button class="btn" disabled>Скоро будет</button></div><div class="game dev anniversaryGame"><div class="gameTop"><div><h2>🛠️ Для разработчиков</h2><p>Служебная панель для управления валютой аккаунта.</p></div><div class="gameIcon">🛠️</div></div><button class="btn" onclick="developerLogin()">Открыть</button></div><div class="game anniversaryGame leafGame"><div class="gameTop"><div><h2>🍂 Листопад</h2><p>Лови падающие листья и собирай осенние очки.</p></div><div class="gameIcon">🍁</div></div><button class="btn" onclick="leafGame()">Играть</button></div></div><section class="anniversaryFooter"><b>🎁 Маленький секрет спрятан прямо на цифре 10</b><span>Нажми на неё, если любишь пасхалки.</span></section><p class="small recovery">Потеряли аккаунт? Напишите на <a href="mailto:gamedevelover@tokman.net">gamedevelover@tokman.net</a></p><p class="small" style="text-align:center;opacity:.65;margin-top:14px">Robom Games v10 • Юбилей 🎂</p></div>`}
+function startLeafFall(){}
 function leafGame(){stopTimers();gameScore=0;app.innerHTML=`<div class="wrap play leafPlay">${head()}<button class="back" onclick="home()">← Меню</button><h1>🍂 Листопад</h1><div class="status">Собрано: <b id="score">0</b></div><div class="status">🪙 Токенов: <b id="tokens">${u.tokens}</b></div><div class="timer">⏱️ <b id="time">00:00</b></div><button id="start" class="btn" onclick="toggleLeaf()">Начать</button><div id="leafArena" class="leafArena"></div></div>`;spawnLeaf()}
 function spawnLeaf(){const a=document.querySelector('#leafArena');if(!a)return;a.querySelectorAll('.catchLeaf').forEach(e=>e.remove());const e=document.createElement('button');e.className='catchLeaf';e.textContent=['🍂','🍁','🍃'][Math.floor(Math.random()*3)];e.style.left=(Math.random()*82+5)+'%';e.style.top=(Math.random()*70+8)+'%';e.onclick=()=>{if(gameRunning){gameScore++;document.querySelector('#score').textContent=gameScore;spawnLeaf()}};a.appendChild(e)}
 function toggleLeaf(){if(gameRunning){stopGame();return}gameRunning=true;document.querySelector('#start').textContent='Стоп';let sec=0;gameTimer=setInterval(()=>{sec++;document.querySelector('#time').textContent=formatTime(sec);spawnLeaf()},1000);rewardTimer=setInterval(()=>{u.tokens++;save();document.querySelector('#tokens').textContent=u.tokens},20000)}
-function autumnSecret(){alert('🍂 Ты нашёл осенний секрет!\n\nПохоже, один листик здесь лишний...')}
+function autumnSecret(){alert('🎉 ПАСХАЛКА НАЙДЕНА!\n\nТы нажал на юбилейную 10.\nRobom Games благодарит тебя за игру! 🥳')}
 function exchange(){app.insertAdjacentHTML("beforeend",`<div class="overlay" id="ex"><div class="exchange"><h2>💱 Обмен валюты</h2><p>Обменять <b>100 Токенов</b> на <b>1 Робом</b>?</p><p class="small">У тебя: ${u.tokens} 🪙 · ${u.robom} 💠</p><button class="btn" onclick="doExchange()">Обменять</button><button class="link" onclick="document.querySelector('#ex').remove()">Отмена</button></div></div>`)}
 function doExchange(){if(u.tokens<100)return alert("Нужно минимум 100 Токенов.");u.tokens-=100;u.robom+=1;save();document.querySelector("#ex").remove();home()}
 function developerLogin(){
